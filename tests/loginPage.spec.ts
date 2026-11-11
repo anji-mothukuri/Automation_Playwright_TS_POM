@@ -14,8 +14,6 @@ test.beforeEach(async ({page})=>{
 });
 
 test('Positive scenario:User successfully logged into sauceLabs.com', async ({page}) => {
-    await loginPage.EnterUserName(users.standard_user.username);
-    await loginPage.EnterPassword(users.standard_user.password);
-    await loginPage.ClickLoginButton();
+    await loginPage.Login(users.standard_user.username, users.standard_user.password);
     await expect(page.locator('.title')).toHaveText('Products');
 });
