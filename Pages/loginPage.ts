@@ -21,12 +21,12 @@ export class LoginPage {
         }
     };
 
-    async EnterUserName(){
-        await this.page.locator('[data-test="username"]').fill('standard_user');
+    async EnterUserName(userName:string){
+        await this.page.locator('[data-test="username"]').fill(userName);
     }
 
-    async EnterPassword(){
-        await this.page.getByPlaceholder('Password').fill('secret_sauce');
+    async EnterPassword(password:string){
+        await this.page.getByPlaceholder('Password').fill(password);
     }
 
     async ClickLoginButton(){
