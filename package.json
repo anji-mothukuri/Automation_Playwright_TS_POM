@@ -1,0 +1,23 @@
+{
+  "name": "automation_playwright_ts_pom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anji-mothukuri/Automation_Playwright_TS_POM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/anji-mothukuri/Automation_Playwright_TS_POM/issues"
+  },
+  "homepage": "https://github.com/anji-mothukuri/Automation_Playwright_TS_POM#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^26.6.6"
+  }
+}
