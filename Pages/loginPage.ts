@@ -2,10 +2,24 @@ import type { Page } from '@playwright/test';
 
 export class LoginPage {
     private page: Page;
-    private base_url: string | undefined;
+    private baseUrl: string | undefined;
 
     constructor(page: Page) {
         this.page = page;
-        this.base_url = process.env.base_url;
+        this.baseUrl = process.env.baseUrl;
     }
+
+    async navigateToLoginPage(){
+        console.log('Navigating to Login page');
+        if(this.baseUrl)
+        {
+            await this.page.goto(this.baseUrl);
+        }
+        else
+        {
+            console.error('Base URL is not defined');
+        }
+    };
 }
+
+module.exports = {LoginPage};
