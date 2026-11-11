@@ -18,6 +18,8 @@
   "homepage": "https://github.com/anji-mothukuri/Automation_Playwright_TS_POM#readme",
   "devDependencies": {
     "@playwright/test": "^1.65.0",
-    "@types/node": "^26.6.6"
+    "@types/node": "^26.6.6",
+    "dotenv": "^18.0.10",
+    "typescript": "^7.0.2"
   }
 }
