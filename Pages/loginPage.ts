@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { threadCpuUsage } from 'node:process';
 
 export class LoginPage {
     private page: Page;
@@ -10,7 +11,6 @@ export class LoginPage {
     }
 
     async navigateToLoginPage(){
-        console.log('Navigating to Login page');
         if(this.baseUrl)
         {
             await this.page.goto(this.baseUrl);
@@ -20,6 +20,18 @@ export class LoginPage {
             console.error('Base URL is not defined');
         }
     };
+
+    async EnterUserName(){
+        await this.page.locator('[data-test="username"]').fill('standard_user');
+    }
+
+    async EnterPassword(){
+        await this.page.getByPlaceholder('Password').fill('secret_sauce');
+    }
+
+    async ClickLoginButton(){
+        await this.page.getByRole('button', {name: 'Login'}).click();
+    }
 }
 
 module.exports = {LoginPage};

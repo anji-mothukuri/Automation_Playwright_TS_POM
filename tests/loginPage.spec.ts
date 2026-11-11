@@ -6,11 +6,15 @@ let loginPage: LoginPage;
 
 test.beforeEach(async ({page})=>{
     loginPage = new LoginPage(page);
+    await loginPage.navigateToLoginPage();
+    await expect(page).toHaveURL('https://www.saucedemo.com/');    
+    console.log('Navigating to Login page');
+    await page.waitForLoadState('load');
 });
 
-test('Navigate to Login page', async ({page}) => {
-    await loginPage.navigateToLoginPage();
-    await expect(page).toHaveURL('https://www.saucedemo.com/login');
-    // await expect(page.locator('.login_logo')).toBeVisible();
-    // await expect(page.locator('.login_logo')).toContainText('Swag Labs');
+test('Positive scenario:User successfully logged into sauceLabs.com', async ({page}) => {
+    await loginPage.EnterUserName();
+    await loginPage.EnterPassword();
+    await loginPage.ClickLoginButton();
+    await expect(page).toHaveTitle('Swag Labs');
 });
