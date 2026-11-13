@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'node:path';
 require('dotenv').config();
+
+const authFile = path.join(__dirname, 'tests/setup/auth.json');
 
 /**
  * Read environment variables from file.
@@ -35,6 +38,12 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    // 1. Setup project runs first
+    {
+      name: 'setup',
+      testMatch: '**/setup/auth.setup.ts',
+      use: { ...devices['Desktop Safari'] },
+    },
     // {
     //   name: 'chromium',
     //   use: { ...devices['Desktop Chrome'] },
@@ -47,7 +56,11 @@ export default defineConfig({
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: authFile,
+      },
+      dependencies: ['setup'],
     },
 
     /* Test against mobile viewports. */

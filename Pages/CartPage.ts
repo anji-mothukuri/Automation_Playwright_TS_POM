@@ -3,7 +3,6 @@ import {test, expect, Page, Locator} from "@playwright/test";
 export class CartPage {
     private page : Page;
     private cartItem : Locator;
-    private removeButton : Locator;
 
     constructor(page: Page){
         this.page = page;
