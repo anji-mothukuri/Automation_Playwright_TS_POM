@@ -18,5 +18,3 @@ export class CartPage {
         await cartItem.getByRole('button', {name: 'Remove'}).click();
     }
 }
-
-module.exports = {CartPage};

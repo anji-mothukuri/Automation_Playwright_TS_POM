@@ -1,5 +1,6 @@
 import { Locator, Page , expect} from '@playwright/test';
 import { Routes } from '../constants/routes';
+import { env } from '../../config/env';
 
 export class LoginPage {
     private page: Page;
@@ -29,16 +30,14 @@ export class LoginPage {
         await this.txtPassword.fill(password);
     }
 
-    async ClickLoginButton(){
+    async clickLoginButton(){
         await this.btnLogin.click();
     }
 
-    async Login(userName:string, password:string){
-        await this.EnterUserName(userName);
-        await this.EnterPassword(password);
-        await this.ClickLoginButton();        
+    async login(){
+        await this.EnterUserName(env.userName);
+        await this.EnterPassword(env.password);
+        await this.clickLoginButton();        
         await expect(this.page.locator('.title')).toHaveText('Products');
     }
 }
-
-module.exports = {LoginPage};

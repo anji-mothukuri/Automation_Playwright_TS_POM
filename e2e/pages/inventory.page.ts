@@ -48,5 +48,3 @@ export class InventoryPage {
         return parseInt(cartCount);
     }
 }
-
-module.exports = {InventoryPage};

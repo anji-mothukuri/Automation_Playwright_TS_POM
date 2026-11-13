@@ -1,8 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import path from 'node:path';
-require('dotenv').config();
-
-const authFile = path.join(__dirname, './playwright/auth.json');
+import { env} from './config/env';
+const authFile = path.resolve(__dirname, 'playwright/auth.json');
 
 /**
  * Read environment variables from file.
@@ -30,7 +29,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://www.saucedemo.com',
+    baseURL: env.baseUrl,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
