@@ -1,1 +1,0 @@
-const productsPage_Title = 'Products';

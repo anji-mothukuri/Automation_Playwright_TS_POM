@@ -1,7 +1,7 @@
 import {test as base, expect} from '@playwright/test';
-import {LoginPage} from '../Pages/loginPage';
-import {InventoryPage} from '../Pages/InventoryPage';
-import {CartPage} from '../Pages/CartPage';
+import {LoginPage} from '../pages/login.page';
+import {InventoryPage} from '../pages/inventory.page';
+import {CartPage} from '../pages/cart.page';
 
 type PageFixtures={
     loginPage:LoginPage,

@@ -1,10 +1,11 @@
-import { Page , expect} from '@playwright/test';
+import { Locator, Page , expect} from '@playwright/test';
+import { Routes } from '../constants/routes';
 
 export class LoginPage {
     private page: Page;
-    private txtUserName: any;
-    private txtPassword: any;
-    private btnLogin: any;
+    private txtUserName: Locator;
+    private txtPassword: Locator;
+    private btnLogin: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -15,9 +16,9 @@ export class LoginPage {
         this.btnLogin = page.getByRole('button', {name:'Login'});
     }
 
-    async goto(url:string){
-        await this.page.goto(url);
-            await expect(this.page).toHaveURL('/');
+    async goto(){
+        await this.page.goto(Routes.Login);
+            await expect(this.page).toHaveURL(Routes.Login);
     };
 
     async EnterUserName(userName:string){

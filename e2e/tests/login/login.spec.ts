@@ -1,7 +1,7 @@
-import {test, expect} from '../fixtures/baseTest';
-import {LoginPage} from '../Pages/loginPage';
-import users from '../TestData/users.json';
-import {Routes} from '../constants/routes';
+import {test, expect} from '../../fixtures/base.test';
+import {LoginPage} from '../../pages/login.page';
+import users from '../../data/users.json';
+import {Routes} from '../../constants/routes';
 
 test.beforeEach(async ({loginPage})=>{
     await loginPage.goto(Routes.Login);

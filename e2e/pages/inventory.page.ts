@@ -2,7 +2,6 @@ import { Locator, Page, expect } from "@playwright/test";
 import { Routes } from "../constants/routes";
 
 export class InventoryPage {
-
     private page : Page;
     private inventoryItem : Locator;
     private shoppingCartBadge:Locator;
@@ -17,8 +16,9 @@ export class InventoryPage {
         this.shoppingCartLink=this.page.locator('[data-test="shopping-cart-link"]');
     }
 
-    async goto(url:string){
-        await this.page.goto(url);
+    async goto(){
+        await this.page.goto(Routes.Inventory);
+        await expect(this.page).toHaveURL(Routes.Inventory);
         await expect(this.page.locator('.title')).toHaveText('Products');
     }
 

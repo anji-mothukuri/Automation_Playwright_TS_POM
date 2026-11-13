@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 import path from 'node:path';
 require('dotenv').config();
 
-const authFile = path.join(__dirname, 'tests/setup/auth.json');
+const authFile = path.join(__dirname, './playwright/auth.json');
 
 /**
  * Read environment variables from file.
@@ -16,7 +16,7 @@ const authFile = path.join(__dirname, 'tests/setup/auth.json');
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './e2e/tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -41,7 +41,7 @@ export default defineConfig({
     // 1. Setup project runs first
     {
       name: 'setup',
-      testMatch: '**/setup/auth.setup.ts',
+      testMatch: 'setup/auth.setup.ts',
       use: { ...devices['Desktop Safari'] },
     },
     // {

@@ -1,9 +1,8 @@
-import {test, expect} from '../fixtures/baseTest';
-import { Routes } from '../constants/routes';
-import{Products} from '../TestData/Products';
+import {test, expect} from '../../fixtures/base.test';
+import{Products} from '../../data/products';
 
 test.beforeEach(async({inventoryPage})=>{
-    await inventoryPage.goto(Routes.Inventory);
+    await inventoryPage.goto();
 });
 
 test('Validate shopping cart items count', async ({inventoryPage})=>{

@@ -1,14 +1,11 @@
-import {test,expect} from "../fixtures/baseTest";
-import {InventoryPage} from "../Pages/InventoryPage";
-import {CartPage} from "../Pages/CartPage";
-import {Routes} from "../constants/routes";
-import {Products} from "../TestData/Products";
+import {test,expect} from "../../fixtures/base.test";
+import {Products} from "../../data/products";
 
 const productNames = [Products.SauceLabsBackpack, Products.SauceLabsBikeLight];
 
-test.beforeEach(async({inventoryPage, cartPage})=>{
+test.beforeEach(async({inventoryPage})=>{
     // Remove all products from cart if already exists
-    await inventoryPage.goto(Routes.Inventory);
+    await inventoryPage.goto();
     await inventoryPage.removeAllProductFromCart();
     
     //Add products to cart

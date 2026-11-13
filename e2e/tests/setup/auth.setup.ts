@@ -1,6 +1,6 @@
 import {test as setup, expect} from '@playwright/test';
 import path from 'path';
-import users from '../../TestData/users.json';
+import users from '../../data/users.json';
 import { Routes } from '../../constants/routes';
 
 setup('authenticate as standard user', async({page})=>{
@@ -11,7 +11,7 @@ setup('authenticate as standard user', async({page})=>{
     await expect(page).toHaveURL(Routes.Inventory);
 
     // Save authentication state to a file
-    const authFile = path.join(__dirname, 'auth.json');
+    const authFile = path.join(__dirname, '../../../playwright/auth.json');
     await page.context().storageState({ path: authFile });
     console.log('Authentication state saved to', authFile);
 });

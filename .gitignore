@@ -6,5 +6,5 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-/tests/setup/auth.json
 .env
+/e2e/data/users
