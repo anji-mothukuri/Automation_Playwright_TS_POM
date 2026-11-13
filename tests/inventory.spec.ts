@@ -18,6 +18,9 @@ test.beforeEach(async({page})=>{
 });
 
 test('Validate shopping cart items count', async ({page})=>{
+    // Remove all products from cart if already exists
+    await inventoryPage.removeAllProductFromCart();
+
     await inventoryPage.addProductToCart('Sauce Labs Backpack');
     await expect(await inventoryPage.getCartItemsCount()).toBe(1);
 
