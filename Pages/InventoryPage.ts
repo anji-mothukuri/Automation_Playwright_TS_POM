@@ -1,5 +1,4 @@
 import { Locator, Page } from "@playwright/test";
-import { listEndpoints } from "node:quic";
 
 export class InventoryPage {
 
@@ -25,12 +24,9 @@ export class InventoryPage {
     async removeAllProductFromCart(){
         let removeButtons = await this.inventoryItem.getByRole('button', {name: 'Remove'});
         const removeButtonCount = await removeButtons.count();
-        console.log(`Number of remove buttons found: ${removeButtonCount}`);
         for(let i = 0; i < removeButtonCount; i++){
-            console.log(`Clicking remove button ${i + 1} of ${removeButtonCount}`);
             await removeButtons.nth(i).click();
         }
-        console.log('All products removed from cart');
     }
 
     async getCartItemsCount(){

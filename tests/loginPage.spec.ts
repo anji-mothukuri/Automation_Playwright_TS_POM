@@ -8,8 +8,7 @@ let loginPage: LoginPage;
 test.beforeEach(async ({page})=>{
     loginPage = new LoginPage(page);
     await loginPage.navigateToLoginPage();
-    await expect(page).toHaveURL('https://www.saucedemo.com/');    
-    console.log('Navigating to Login page');
+    await expect(page).toHaveURL('https://www.saucedemo.com/');
     await page.waitForLoadState('load');
 });
 

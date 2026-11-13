@@ -1,25 +1,17 @@
 import {test,expect} from "@playwright/test";
-import {LoginPage} from "../Pages/loginPage";
 import {InventoryPage} from "../Pages/InventoryPage";
 import {CartPage} from "../Pages/CartPage";
-import users from "../TestData/users.json";
 
-let loginPage:LoginPage;
 let inventoryPage:InventoryPage;
 let cartPage:CartPage;
 
 test.beforeEach(async({page})=>{
-    loginPage = new LoginPage(page);
     inventoryPage = new InventoryPage(page);
     cartPage = new CartPage(page);
 
-    //Login to website
-    await loginPage.navigateToLoginPage();
-    await loginPage.Login(users.standard_user.username, users.standard_user.password);
-
-    //Add items to cart
-    await page.waitForLoadState('load');
     // Remove all products from cart if already exists
+    await page.goto('https://www.saucedemo.com/inventory.html');
+    await expect(page.locator('.title')).toHaveText('Products');
     await inventoryPage.removeAllProductFromCart();
     await inventoryPage.addProductToCart('Sauce Labs Backpack');
     await inventoryPage.addProductToCart('Sauce Labs Bike Light');
