@@ -1,17 +1,12 @@
-import {test,expect} from "@playwright/test";
+import {test,expect} from "../fixtures/baseTest";
 import {InventoryPage} from "../Pages/InventoryPage";
 import {CartPage} from "../Pages/CartPage";
 import {Routes} from "../constants/routes";
 import {Products} from "../TestData/Products";
 
-let inventoryPage:InventoryPage;
-let cartPage:CartPage;
-let productNames = [Products.SauceLabsBackpack, Products.SauceLabsBikeLight];
+const productNames = [Products.SauceLabsBackpack, Products.SauceLabsBikeLight];
 
-test.beforeEach(async({page})=>{
-    inventoryPage = new InventoryPage(page);
-    cartPage = new CartPage(page);
-
+test.beforeEach(async({inventoryPage, cartPage})=>{
     // Remove all products from cart if already exists
     await inventoryPage.goto(Routes.Inventory);
     await inventoryPage.removeAllProductFromCart();
@@ -25,17 +20,17 @@ test.beforeEach(async({page})=>{
     await inventoryPage.navigateToCartPage();
 });
 
-test('Validate remove cart item', async ({page})=>{
+test('Validate remove cart item', async ({cartPage})=>{
     const allCartItems = await cartPage.getAllCartItems();
     expect(allCartItems.length).toBe(2);
-    expect(allCartItems).toEqual(['Sauce Labs Backpack', 'Sauce Labs Bike Light']);
+    expect(allCartItems).toEqual([Products.SauceLabsBackpack, Products.SauceLabsBikeLight]);
 
-    await cartPage.removeCartItem('Sauce Labs Backpack');
+    await cartPage.removeCartItem(Products.SauceLabsBackpack);
     const updatedCartItems = await cartPage.getAllCartItems();
     expect(updatedCartItems.length).toBe(1);
-    expect(updatedCartItems).toEqual(['Sauce Labs Bike Light']);
+    expect(updatedCartItems).toEqual([Products.SauceLabsBikeLight]);
 
-    await cartPage.removeCartItem('Sauce Labs Bike Light');
+    await cartPage.removeCartItem(Products.SauceLabsBikeLight);
     const finalCartItems = await cartPage.getAllCartItems();
     expect(finalCartItems.length).toBe(0);
     expect(finalCartItems).toEqual([]);

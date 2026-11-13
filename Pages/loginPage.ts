@@ -1,16 +1,13 @@
-import type { Page } from '@playwright/test';
-import { threadCpuUsage } from 'node:process';
+import { Page , expect} from '@playwright/test';
 
 export class LoginPage {
     private page: Page;
-    private baseUrl: string | undefined;
     private txtUserName: any;
     private txtPassword: any;
     private btnLogin: any;
 
     constructor(page: Page) {
         this.page = page;
-        this.baseUrl = process.env.baseUrl;
 
         //locators
         this.txtUserName = page.getByPlaceholder('Username');
@@ -18,15 +15,9 @@ export class LoginPage {
         this.btnLogin = page.getByRole('button', {name:'Login'});
     }
 
-    async navigateToLoginPage(){
-        if(this.baseUrl)
-        {
-            await this.page.goto(this.baseUrl);
-        }
-        else
-        {
-            console.error('Base URL is not defined');
-        }
+    async goto(url:string){
+        await this.page.goto(url);
+            await expect(this.page).toHaveURL('/');
     };
 
     async EnterUserName(userName:string){
@@ -44,7 +35,8 @@ export class LoginPage {
     async Login(userName:string, password:string){
         await this.EnterUserName(userName);
         await this.EnterPassword(password);
-        await this.ClickLoginButton();
+        await this.ClickLoginButton();        
+        await expect(this.page.locator('.title')).toHaveText('Products');
     }
 }
 

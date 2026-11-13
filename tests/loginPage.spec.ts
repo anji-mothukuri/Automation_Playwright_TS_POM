@@ -1,18 +1,12 @@
-import {test, expect} from '@playwright/test';
-// const {test, expect} = require('@playwright/test');
+import {test, expect} from '../fixtures/baseTest';
 import {LoginPage} from '../Pages/loginPage';
 import users from '../TestData/users.json';
+import {Routes} from '../constants/routes';
 
-let loginPage: LoginPage;
-
-test.beforeEach(async ({page})=>{
-    loginPage = new LoginPage(page);
-    await loginPage.navigateToLoginPage();
-    await expect(page).toHaveURL('/');
-    await page.waitForLoadState('load');
+test.beforeEach(async ({loginPage})=>{
+    await loginPage.goto(Routes.Login);
 });
 
-test('Positive scenario:User successfully logged into sauceLabs.com', async ({page}) => {
+test('Positive scenario:User successfully logged into sauceLabs.com', async ({loginPage}) => {
     await loginPage.Login(users.standard_user.username, users.standard_user.password);
-    await expect(page.locator('.title')).toHaveText('Products');
 });
