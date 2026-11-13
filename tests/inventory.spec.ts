@@ -1,12 +1,12 @@
 import {test, expect} from '@playwright/test';
 import {InventoryPage} from '../Pages/InventoryPage';
+import { Routes } from '../constants/routes';
 
 let inventoryPage: InventoryPage;
 
 test.beforeEach(async({page})=>{
     inventoryPage = new InventoryPage(page);
-    await page.goto('https://www.saucedemo.com/inventory.html');
-    await expect(page.locator('.title')).toHaveText('Products');
+    await inventoryPage.goto(Routes.Inventory);
 });
 
 test('Validate shopping cart items count', async ({page})=>{

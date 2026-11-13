@@ -1,4 +1,5 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
+import { Routes } from "../constants/routes";
 
 export class InventoryPage {
 
@@ -16,6 +17,16 @@ export class InventoryPage {
         this.shoppingCartLink=this.page.locator('[data-test="shopping-cart-link"]');
     }
 
+    async goto(url:string){
+        await this.page.goto(url);
+        await expect(this.page.locator('.title')).toHaveText('Products');
+    }
+
+    async navigateToCartPage(){
+        await this.shoppingCartLink.click();
+        await expect(this.page).toHaveURL(Routes.Cart);
+    }
+    
     async addProductToCart(productName:string){
         let cartItem = this.inventoryItem.filter({hasText:productName});
         await cartItem.getByRole('button', {name: 'Add to cart'}).click();
@@ -35,10 +46,6 @@ export class InventoryPage {
             return 0;
         }
         return parseInt(cartCount);
-    }
-
-    async navigateToCartPage(){
-        await this.shoppingCartLink.click();
     }
 }
 
