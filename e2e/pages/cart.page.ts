@@ -1,11 +1,12 @@
 import {Page, Locator} from "@playwright/test";
+import { BasePage } from "./base.page";
+import { TestLogger } from "../utils/logger";
 
-export class CartPage {
-    private page : Page;
+export class CartPage extends BasePage {
     private cartItem : Locator;
 
-    constructor(page: Page){
-        this.page = page;
+    constructor(page: Page, log: TestLogger){
+        super(page, log);
         this.cartItem=this.page.locator('[data-test="inventory-item-name"]');
     }
 

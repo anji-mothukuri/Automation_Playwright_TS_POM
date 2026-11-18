@@ -1,25 +1,20 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { Routes } from "../constants/routes";
+import { BasePage } from "./base.page";
+import { TestLogger } from "../utils/logger";
 
-export class InventoryPage {
-    private page : Page;
+export class InventoryPage extends BasePage {
     private inventoryItem : Locator;
     private shoppingCartBadge:Locator;
     private shoppingCartLink:Locator;
 
-    constructor(page:Page){
-        this.page = page;
+    constructor(page:Page, log: TestLogger){
+        super(page, log);
 
         //locators
         this.inventoryItem = this.page.locator('.inventory_item');
         this.shoppingCartBadge = this.page.locator('.shopping_cart_badge');
         this.shoppingCartLink=this.page.locator('[data-test="shopping-cart-link"]');
-    }
-
-    async goto(){
-        await this.page.goto(Routes.Inventory);
-        await expect(this.page).toHaveURL(Routes.Inventory);
-        await expect(this.page.locator('.title')).toHaveText('Products');
     }
 
     async navigateToCartPage(){

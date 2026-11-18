@@ -1,15 +1,16 @@
 import { Locator, Page , expect} from '@playwright/test';
 import { Routes } from '../constants/routes';
 import { env } from '../../config/env';
+import { BasePage } from './base.page';
+import { TestLogger } from '../utils/logger';
 
-export class LoginPage {
-    private page: Page;
+export class LoginPage extends BasePage{
     private txtUserName: Locator;
     private txtPassword: Locator;
     private btnLogin: Locator;
 
-    constructor(page: Page) {
-        this.page = page;
+    constructor(page: Page, log: TestLogger) {
+        super(page, log);
 
         //locators
         this.txtUserName = page.getByPlaceholder('Username');
@@ -17,10 +18,6 @@ export class LoginPage {
         this.btnLogin = page.getByRole('button', {name:'Login'});
     }
 
-    async goto(){
-        await this.page.goto(Routes.Login);
-            await expect(this.page).toHaveURL(Routes.Login);
-    };
 
     async EnterUserName(userName:string){
         await this.txtUserName.fill(userName);

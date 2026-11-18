@@ -1,10 +1,8 @@
-import {test as setup, expect} from '@playwright/test';
+import {test as setup, expect} from '../../fixtures/base.test';
 import path from 'path';
-import { LoginPage } from '../../pages/login.page';
 
-setup('authenticate as standard user', async({page})=>{
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
+setup('authenticate as standard user', async({page, loginPage})=>{
+    await loginPage.navigateTo('/');
     await loginPage.login();
 
     // Save authentication state to a file

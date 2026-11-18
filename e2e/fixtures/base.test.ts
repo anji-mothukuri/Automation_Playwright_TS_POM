@@ -3,7 +3,6 @@ import { createTestLogger, TestLogger } from '../utils/logger';
 import {LoginPage} from '../pages/login.page';
 import {InventoryPage} from '../pages/inventory.page';
 import {CartPage} from '../pages/cart.page';
-import { log } from 'node:console';
 
 type PageFixtures={
     log: TestLogger,    
@@ -26,15 +25,15 @@ export const test = base.extend<PageFixtures>({
         });
     },
     
-    loginPage: async({page},use)=>{        
-        await use(new LoginPage(page));
+    loginPage: async({page, log},use)=>{        
+        await use(new LoginPage(page, log));
     },
-    inventoryPage: async({page},use)=>{
-        await use(new InventoryPage(page));
+    inventoryPage: async({page, log},use)=>{
+        await use(new InventoryPage(page, log));
     },
-    cartPage: async({page},use)=>{
-        await use(new CartPage(page));
-    }
+    cartPage: async({page, log},use)=>{
+        await use(new CartPage(page, log));
+    },
 });
 
 export {expect};
